@@ -1,6 +1,5 @@
 function displayPoem(response) {
-  console.log("poem generated");
-  new Typewriter("#poem", {
+  new Typewriter("#lesson", {
     strings: response.data.answer,
     autoStart: true,
     delay: 1,
@@ -15,17 +14,14 @@ function generatePoem(event) {
   let apiKey = "eaf7dab2b2d4b14t4ff1e93aa36o60ff";
 
   let context =
-    "You are a romantic poem expert and love to write short poems. Your mission is to generate a 4 line poem in basic HTML and separate each line with a <br />. Make sure to follow the user's instructions. Do not include a title to the poem. Sign wih 'Shecodes AI' inside a <strong> element at the end of the poem NOT at the beginning";
-  let prompt = `User's instructions: Generate a spanish poem about ${instructionsInput.value}`;
+    "You are very wise and experienced. Your mission is to generate a 5 or 6 line life lesson. Make sure to follow the user's instructions and avoid offensive language. Do not include a title. At the end please recommend a book related to the subject and name it's author. Separate the book recommendation by a <br />";
+  let prompt = `User's instructions: provide a life lesson based on ${instructionsInput.value} and recommend a book`;
   let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
 
-  let outputElement = document.querySelector("#poem");
+  let outputElement = document.querySelector("#lesson");
   outputElement.classList.remove("hidden");
-  outputElement.innerHTML = "Generating your answer";
+  outputElement.innerHTML = `<div class="spin">⏳</div>`;
 
-  console.log("generating Poem");
-  console.log(`Prompt: ${prompt}`);
-  console.log(`Context: ${context}`);
   axios.get(apiUrl).then(displayPoem);
 }
 
